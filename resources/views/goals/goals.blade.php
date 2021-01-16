@@ -1,4 +1,4 @@
-@if (count($goals) > 0)
+@if (count($goals) >= 0)
     <ul class="list-unstyled">
         @foreach ($goals as $goal)
             <li class="media mb-3">
