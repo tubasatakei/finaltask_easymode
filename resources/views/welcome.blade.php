@@ -4,13 +4,8 @@
 　　 @if (Auth::check())
 　　     <div class="row">
             <aside class="col-sm-4">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">{{ Auth::user()->name }}<h3>
-                    </div>
-                    <div class="card-body">
-                    </div>
-                </div>
+                 {{-- ユーザ情報 --}}
+                @include('users.card')
             </aside>
             <div class="col-sm-8">
                 {{-- 投稿一覧 --}}
@@ -18,11 +13,15 @@
             </div>
         </div>
     @else
-        <div class="center jumbotron">
-            <div class="text-center">
-                <h1>Finaltask</h1>
-        {{-- ユーザ登録ページへのリンク --}}
-                {!! link_to_route('signup.get', '会員登録', [], ['class' => 'btn btn-lg btn-primary']) !!}
+    //登録日時降順のユーザ一覧にしたい
+       <div class="row">
+            <aside class="col-sm-4">
+                 {{-- ユーザ情報 --}}
+                @include('users.card')
+            </aside>
+            <div class="col-sm-8">
+                {{-- 投稿一覧 --}}
+                @include('goals.goals')
             </div>
         </div>
     @endif
