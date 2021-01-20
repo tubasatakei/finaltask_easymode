@@ -6,11 +6,11 @@
              {{-- ユーザ情報 --}}
             @include('users.card')
         </aside>
-        <div class="col-sm-8">
-           {{-- タブ --}}
-            @include('users.navtabs')
-            @if (Auth::id() == $user->id)
+            
             @include('goals.goals')
-        </div>
+            @include('tasks.tasks')
+            
     </div>
 @endsection
+
+{{-- マイページ、目標、課題一覧とそれぞれの作成等のページに飛ばしたい--}}

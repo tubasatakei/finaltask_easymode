@@ -1,4 +1,4 @@
-@if (count($goals) >= 0)
+@if (count($goals) > 0)
     <ul class="list-unstyled">
         @foreach ($goals as $goal)
             <li class="media mb-3">
@@ -13,6 +13,7 @@
                         <p class="mb-0">{!! nl2br(e($goal->content)) !!}</p>
                     </div>
                     {{-- 課題の一覧入れる、ページネーション--}}
+                    @include('tasks.tasks')
                 </div>
             </li>
         @endforeach

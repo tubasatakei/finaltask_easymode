@@ -36,9 +36,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
     public function goals()
     {
         return $this->hasMany(Goal::class);
+    }
+    
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
     }
 
     /**
@@ -111,5 +117,40 @@ class User extends Authenticatable
         $userIds[] = $this->id;
         // それらのユーザが所有する投稿に絞り込む
         return Goal::whereIn('user_id', $userIds);
+    }
+    
+     /** がんばれの入力 */
+     public function favorites()
+    {
+        return $this->belongsToMany(Task::class, 'user_task','user_id','task_id')->withTimestamps();
+    }
+    
+    public function favorite($taskId)
+    {
+        $exist = $this->is_favorite($taskId);
+        
+        if ($exist) {
+            return false;
+        } else {
+            $this->favorites()->attach($taskId);
+            return true;
+        }
+    }
+        
+    public function unfavorite($taskId)
+    {
+        $exist = $this->is_favorite($taskId);
+        
+        if ($exist) {
+            $this->favorites()->detach($taskId);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public function is_favorite($taskId)
+    {
+        return $this->favorites()->where('task_id', $taskId)->exists();
     }
 }

@@ -7,10 +7,13 @@
             @include('users.card')
         </aside>
         <div class="col-sm-8">
-            {{-- タブ --}}
-            @include('users.navtabs')
+           
             {{-- ユーザ一覧 --}}
             @include('users.users')
+            {{--@include('goals.goals')--}}
+            @include('user_follow.follow_button')
         </div>
     </div>
 @endsection
+
+{{--名前、目標、フォローボタンを入れたい--}}

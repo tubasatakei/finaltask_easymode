@@ -26,11 +26,19 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('unfollow', 'UserFollowController@destroy')->name('user.unfollow');
         Route::get('followings', 'UsersController@followings')->name('users.followings');
         Route::get('followers', 'UsersController@followers')->name('users.followers');
+        Route::get('favorites', 'UsersController@favorites')->name('users.favorites'); 
     });
+        
+        Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
     
-    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
+        Route::resource('goals', 'GoalsController');
+        
+    Route::group(['prefix' => 'tasks/{id}'], function () {
+        Route::post('favorite', 'FavoritesController@store')->name('favorites.favorite');
+        Route::delete('unfavorite', 'FavoritesController@destroy')->name('favorites.unfavorite');
+        
+    });
+  
+    Route::resource('tasks', 'TasksController');
     
-    Route::resource('goals', 'GoalsController');
 });
-
-/* goalとtaskでshow,store,update,destroyが必要*/

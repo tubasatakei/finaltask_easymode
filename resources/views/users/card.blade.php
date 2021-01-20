@@ -4,6 +4,5 @@
     </div>
     <div class="card-body">
     </div>
-</div>
-{{-- フォロー／アンフォローボタン --}}
+</div>{{-- フォロー／アンフォローボタン --}}
 @include('user_follow.follow_button')

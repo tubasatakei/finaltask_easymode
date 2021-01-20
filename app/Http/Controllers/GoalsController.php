@@ -8,15 +8,13 @@ class GoalsController extends Controller
 {
     public function index()
     {
+        $data = [];
         if (\Auth::check()) {
             // 認証済みユーザ（閲覧者）を取得
             $user = \Auth::user();
             // ユーザとフォロー中ユーザの目標一覧を作成日時の降順で取得
             $goals = $user->feed_goals()->orderBy('created_at', 'desc')->paginate(5);
-        } else {
-            //認証済みでない人は作成日時降順のユーザ目標一覧を取得
-            $goals = $user->orderBy('created_at', 'desc')->paginate(5);
-        
+       
             $data = [
                 'user' => $user,
                 'goals' => $goals,
@@ -25,6 +23,16 @@ class GoalsController extends Controller
 
         // Welcomeビューでそれらを表示
         return view('welcome', $data);
+    }
+    
+     public function create()
+    {
+        $goal = new Goal;
+
+        // 目標作成ビューを表示
+        return view('goals.create', [
+            'goal' => $goal,
+        ]);
     }
     
     public function store(Request $request)
@@ -42,6 +50,29 @@ class GoalsController extends Controller
         // 前のURLへリダイレクトさせる
         return back();
     }
+    
+    public function show($id)
+    {
+        // idの値でゴールを検索して取得
+        $goal = Goal::findOrFail($id);
+
+        // メッセージ詳細ビューでそれを表示
+        return view('goals.show', [
+            'goal' => $goal,
+        ]);
+    }
+    
+     public function edit($id)
+    {
+        // idの値でゴールを検索して取得
+        $goal = Goal::findOrFail($id);
+
+        // ゴール編集ビューでそれを表示
+        return view('goals.edit', [
+            'goal' => $goal,
+        ]);
+    } 
+    
     public function destroy($id)
     {
         // idの値で投稿を検索して取得

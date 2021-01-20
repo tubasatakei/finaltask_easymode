@@ -1,5 +1,5 @@
 <header class="mb-4">
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-expand navbar-darf bg-light">
         {{-- トップページへのリンク --}}
         <a class="navbar-brand" href="/">Finaltask</a>
 
@@ -12,15 +12,28 @@
             <ul class="navbar-nav">
                 @if (Auth::check())
                     {{-- ユーザ一覧ページへのリンク --}}
-                     <li class="nav-item">{!! link_to_route('users.index', 'ユーザ一覧', [], ['class' => 'nav-link']) !!}</li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            {{-- ユーザ詳細ページへのリンク --}}
-                            <li class="dropdown-item">{!! link_to_route('users.show', 'マイページ', ['user' => Auth::id()]) !!}</li>
-                            <li class="dropdown-divider"></li>
+                    <li class="nav-item">{!! link_to_route('users.index', 'ユーザ一覧', [], ['class' => 'nav-link']) !!}</li>
+                    
+                    {{-- ユーザ詳細(マイページ）へのリンク --}}
+                    <li class="nav-item">{!! link_to_route('users.show', 'マイページ', ['user' => Auth::id()]) !!}</li>
+                    
+                    {{-- フォロー一覧へのリンク --}}
+                    {{--<li class="nav-item">{!! link_to_route('users.followings','フォロー一覧', ['class' => 'nav-link']) !!}</li>--}}
+                    <li class="nav-item">
+                        <a href="{{ route('users.followings', ['id' => $user->id]) }}" class="nav-link {{ Request::routeIs('users.followings') ? 'active' : '' }}">
+                        フォロー一覧
+                        </a>
+                    </li>
+                         
+                    {{-- フォロワー一覧へのリンク --}}
+                    {{--<li class="nav-item">{!! link_to_route('users.followers','フォロワー一覧', ['class' => 'nav-link']) !!}</li>--}}
+                    <li class="nav-item">
+                        <a href="{{ route('users.followers', ['id' => $user->id]) }}" class="nav-link {{ Request::routeIs('users.followers') ? 'active' : '' }}">
+                        フォロワー一覧
+                        </a>
+                    </li> 
                             {{-- ログアウトへのリンク --}}
-                            <li class="dropdown-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>
+                            <li class="nav-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>
                         </ul>
                     </li>
                 @else
@@ -33,3 +46,5 @@
         </div>
     </nav>
 </header>
+
+{{--　タブをボタンに変えたい--}}
