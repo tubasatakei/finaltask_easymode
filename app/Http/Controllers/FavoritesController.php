@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 class FavoritesController extends Controller
 {
-    public function store($taskId)
+    public function store($goalId)
     {
-        \Auth::user()->favorite($taskId);
+        \Auth::user()->favorite($goalId);
         return back();
     }
 
-    public function destroy($taskId)
+    public function destroy($goalId)
     {
-        \Auth::user()->unfavorite($taskId);
+        \Auth::user()->unfavorite($goalId);
         return back();
     }
 }

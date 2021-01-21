@@ -10,7 +10,6 @@
            
             {{-- ユーザ一覧 --}}
             @include('users.users')
-            {{--@include('goals.goals')--}}
             @include('user_follow.follow_button')
         </div>
     </div>

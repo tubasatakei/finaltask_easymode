@@ -33,12 +33,10 @@ Route::group(['middleware' => ['auth']], function () {
     
         Route::resource('goals', 'GoalsController');
         
-    Route::group(['prefix' => 'tasks/{id}'], function () {
+    Route::group(['prefix' => 'goals/{id}'], function () {
         Route::post('favorite', 'FavoritesController@store')->name('favorites.favorite');
         Route::delete('unfavorite', 'FavoritesController@destroy')->name('favorites.unfavorite');
         
     });
-  
-    Route::resource('tasks', 'TasksController');
     
 });

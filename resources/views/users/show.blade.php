@@ -13,7 +13,6 @@
             @endif
             {{-- 投稿一覧 --}}
             @include('goals.goals')
-            @include('tasks.tasks')
          </div>   
     </div>
 @endsection

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTasksTable extends Migration
+class CreateUserGoalTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreateTasksTable extends Migration
      */
     public function up()
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('user_goal', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('goal_id');
-            $table->string('content');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('goal_id'); 
             $table->timestamps();
-            $table->string('complete');
-            //complete追加する
             
-            // 外部キー制約
-            $table->foreign('goal_id')->references('id')->on('goals');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('goal_id')->references('id')->on('goals')->onDelete('cascade');
+            
         });
     }
 
@@ -33,6 +32,6 @@ class CreateTasksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('user_goal');
     }
 }

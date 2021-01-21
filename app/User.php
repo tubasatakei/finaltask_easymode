@@ -42,11 +42,6 @@ class User extends Authenticatable
         return $this->hasMany(Goal::class);
     }
     
-    public function tasks()
-    {
-        return $this->hasMany(Task::class);
-    }
-
     /**
      * このユーザがフォロー中のユーザ。（ Userモデルとの関係を定義）
      */
@@ -122,35 +117,35 @@ class User extends Authenticatable
      /** がんばれの入力 */
      public function favorites()
     {
-        return $this->belongsToMany(Task::class, 'user_task','user_id','task_id')->withTimestamps();
+        return $this->belongsToMany(Goal::class, 'user_goal','user_id','goal_id')->withTimestamps();
     }
     
-    public function favorite($taskId)
+    public function favorite($goalId)
     {
-        $exist = $this->is_favorite($taskId);
+        $exist = $this->is_favorite($goalId);
         
         if ($exist) {
             return false;
         } else {
-            $this->favorites()->attach($taskId);
+            $this->favorites()->attach($goalId);
             return true;
         }
     }
         
-    public function unfavorite($taskId)
+    public function unfavorite($goalId)
     {
-        $exist = $this->is_favorite($taskId);
+        $exist = $this->is_favorite($goalId);
         
         if ($exist) {
-            $this->favorites()->detach($taskId);
+            $this->favorites()->detach($goalId);
             return true;
         } else {
             return false;
         }
     }
     
-    public function is_favorite($taskId)
+    public function is_favorite($goalId)
     {
-        return $this->favorites()->where('task_id', $taskId)->exists();
+        return $this->favorites()->where('goal_id', $goalId)->exists();
     }
 }
