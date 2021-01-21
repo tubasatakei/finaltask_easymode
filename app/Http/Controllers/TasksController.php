@@ -16,7 +16,8 @@ class TasksController extends Controller
             $tasks = $goal->tasks()->orderBy('created_at', 'desc')->paginate(10);
 
             $data = [
-                'goal' => $goal,
+                'user' => $user,
+                'goals' => $goals,
                 'tasks' => $tasks,
             ];
         }

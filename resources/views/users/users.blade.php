@@ -5,6 +5,11 @@
                 <div class="media-body">
                     <div>
                         {{ $user->name }}
+                        @foreach ($user->goals as $goal)
+                            {{$goal->content}}
+                        @endforeach
+                        
+                        
                     </div>
                     <div>
                         {{-- ユーザ詳細ページへのリンク --}}

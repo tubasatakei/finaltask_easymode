@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Goal extends Model
 {
-    protected $fillable = ['content'];
+    protected $fillable = ['content','complete'];
 
     /**
      * この投稿を所有するユーザ。（ Userモデルとの関係を定義）

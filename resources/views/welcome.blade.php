@@ -8,12 +8,11 @@
                 @include('users.card')
             </aside>
             <div class="col-sm-8">
-                {{-- 目標一覧 --}}
-                <div class="dropdown">
-                    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">
-                         @include('goals.goals') 
-                    </button>
-                    <div class="dropdown-menu">{{--以下ドロップダウンする目標、メニューリンク？--}}
+                {{-- 投稿フォーム --}}
+                @include('goals.form')
+                {{-- 投稿一覧 --}}
+                @include('goals.goals')
+            </div>
                     {{-- フォローボタン--}}
                     @include('user_follow.follow_button')
                     </div>

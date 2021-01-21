@@ -18,20 +18,18 @@
                     <li class="nav-item">{!! link_to_route('users.show', 'マイページ', ['user' => Auth::id()]) !!}</li>
                     
                     {{-- フォロー一覧へのリンク --}}
-                    {{--<li class="nav-item">{!! link_to_route('users.followings','フォロー一覧', ['class' => 'nav-link']) !!}</li>--}}
                     <li class="nav-item">
-                        <a href="{{ route('users.followings', ['id' => $user->id]) }}" class="nav-link {{ Request::routeIs('users.followings') ? 'active' : '' }}">
+                        <a href="{{ route('users.followings', ['id' => Auth::id()]) }}" class="nav-link {{ Request::routeIs('users.followings') ? 'active' : '' }}">
                         フォロー一覧
                         </a>
                     </li>
                          
                     {{-- フォロワー一覧へのリンク --}}
-                    {{--<li class="nav-item">{!! link_to_route('users.followers','フォロワー一覧', ['class' => 'nav-link']) !!}</li>--}}
                     <li class="nav-item">
-                        <a href="{{ route('users.followers', ['id' => $user->id]) }}" class="nav-link {{ Request::routeIs('users.followers') ? 'active' : '' }}">
+                        <a href="{{ route('users.followers', ['id' => Auth::id()]) }}" class="nav-link {{ Request::routeIs('users.followers') ? 'active' : '' }}">
                         フォロワー一覧
                         </a>
-                    </li> 
+                    </li>
                             {{-- ログアウトへのリンク --}}
                             <li class="nav-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>
                         </ul>
