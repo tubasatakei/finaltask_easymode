@@ -9,38 +9,41 @@
 
         <div class="collapse navbar-collapse" id="nav-bar">
             <ul class="navbar-nav mr-auto"></ul>
-            <ul class="navbar-nav">
-                @if (Auth::check())
+            <div class="dropdown">
+                <button type="button" class="btn btn-light btn-lg dropdown-toggle" data-toggle="dropdown">
+                    メニュー 
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item">
+                    @if (Auth::check())
                     {{-- ユーザ一覧ページへのリンク --}}
-                    <li class="nav-item">{!! link_to_route('users.index', 'ユーザ一覧', [], ['class' => 'nav-link']) !!}</li>
-                    
+                    {!! link_to_route('users.index', 'ユーザ一覧', [], ['class' => 'nav-link']) !!}</a>
+                    <a class="dropdown-item">
                     {{-- ユーザ詳細(マイページ）へのリンク --}}
-                    <li class="nav-item">{!! link_to_route('users.show', '目標一覧', ['user' => Auth::id()]) !!}</li>
-                    
+                    {!! link_to_route('users.show', '目標一覧', ['user' => Auth::id()]) !!}</a>
                     {{-- フォロー一覧へのリンク --}}
-                    <li class="nav-item">
+                    <a class="dropdown-item">
                         <a href="{{ route('users.followings', ['id' => Auth::id()]) }}" class="nav-link {{ Request::routeIs('users.followings') ? 'active' : '' }}">
                         フォロー
                         </a>
-                    </li>
-                         
+                    </a>
                     {{-- フォロワー一覧へのリンク --}}
-                    <li class="nav-item">
+                    <a class="dropdown-item">
                         <a href="{{ route('users.followers', ['id' => Auth::id()]) }}" class="nav-link {{ Request::routeIs('users.followers') ? 'active' : '' }}">
                         フォロワー
                         </a>
-                    </li>
-                 
+                    </a>
                     {{-- ログアウトへのリンク --}}
-                    <li class="nav-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>
-                    
-                @else
+                    <a class="dropdown-item">{!! link_to_route('logout.get', 'ログアウト') !!}</a>
+    
+                    @else
                     {{-- ログインページへのリンク --}}
-                    <li class="nav-item">{!! link_to_route('login', 'ログイン', [], ['class' => 'nav-link']) !!}</li>
+                    <a class="dropdown-item">{!! link_to_route('login', 'ログイン', [], ['class' => 'nav-link']) !!}</a>
                     {{-- ユーザ登録ページへのリンク --}}
-                    <li class="nav-item">{!! link_to_route('signup.get', '会員登録', [], ['class' => 'nav-link']) !!}</li>
-                @endif
-            </ul>
+                    <a class="dropdown-item">{!! link_to_route('signup.get', '利用登録', [], ['class' => 'nav-link']) !!}</a>
+                    @endif
+                </div>
+            </div>
         </div>
     </nav>
 </header>
