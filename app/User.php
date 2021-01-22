@@ -148,4 +148,44 @@ class User extends Authenticatable
     {
         return $this->favorites()->where('goal_id', $goalId)->exists();
     }
+    
+    /**達成の入力*/
+    public function completes()
+    {
+        return $this->belongsToMany(Goal::class, 'user_goal','user_id','goal_id')->withTimestamps();
+    }
+    
+    public function complete($goalId)
+    {
+        $exist = $this->is_complete($goalId);
+        /**  自分かどうかの確認*/
+        $its_me = $this->id == $goalId;
+
+        if ($exist) {
+            return false;
+        } else {
+            $this->completes()->attach($goalId);
+            return true;
+        }
+    }
+        
+    public function uncomplete($goalId)
+    {
+        $exist = $this->is_complete($goalId);
+        
+        $its_me = $this->id == $goalId;
+
+        if ($exist) {
+            $this->completes()->detach($goalId);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public function is_complete($goalId)
+    {
+        return $this->completes()->where('goal_id', $goalId)->exists();
+    }
 }
+

@@ -22,9 +22,9 @@
     @else
         <div class="center jumbotron">
             <div class="text-center">
-                <h1>Finaltask</h1>
+                <h1>三日坊主チャレンジ</h1>
                 {{-- ユーザ登録ページへのリンク --}}
-                {!! link_to_route('signup.get', 'Sign up now!', [], ['class' => 'btn btn-lg btn-primary']) !!}
+                {!! link_to_route('signup.get', '利用登録', [], ['class' => 'btn btn-lg btn-primary']) !!}
             </div>
         </div>
     @endif

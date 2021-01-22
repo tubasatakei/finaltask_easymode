@@ -40,7 +40,6 @@ class GoalsController extends Controller
         // バリデーション
         $request->validate([
             'content' => 'required|max:255',
-            'complete' =>  'boolean',
         ]);
 
         // 認証済みユーザ（閲覧者）の投稿として作成（リクエストされた値をもとに作成）
@@ -51,28 +50,6 @@ class GoalsController extends Controller
         // 前のURLへリダイレクトさせる
         return back();
     }
-    
-    public function show($id)
-    {
-        // idの値でゴールを検索して取得
-        $goal = Goal::findOrFail($id);
-
-        // メッセージ詳細ビューでそれを表示
-        return view('goals.show', [
-            'goal' => $goal,
-        ]);
-    }
-    
-     public function edit($id)
-    {
-        // idの値でゴールを検索して取得
-        $goal = Goal::findOrFail($id);
-
-        // ゴール編集ビューでそれを表示
-        return view('goals.edit', [
-            'goal' => $goal,
-        ]);
-    } 
     
     public function destroy($id)
     {

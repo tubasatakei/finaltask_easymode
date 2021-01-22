@@ -85,4 +85,18 @@ class UsersController extends Controller
             'goals' => $favorites,
         ]);
     }
+    
+     public function completes($goalId)
+    {
+        $user = User::findOrFail($goalId);
+        
+        $user->loadRelationshipCounts();
+        
+        $completes = $user->completes()->paginate(10);
+        
+        return view('users.completes',[
+            'user' => $user,
+            'goals' => $completes,
+        ]);
+    }
 }

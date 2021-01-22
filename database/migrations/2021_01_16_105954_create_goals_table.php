@@ -18,8 +18,6 @@ class CreateGoalsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('content');
             $table->timestamps();
-            $table->Boolean('complete');
-            //complete追加する
             
             // 外部キー制約
             $table->foreign('user_id')->references('id')->on('users');

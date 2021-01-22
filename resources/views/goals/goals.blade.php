@@ -9,28 +9,23 @@
                         <span class="text-muted">posted at {{ $goal->created_at }}</span>
                     </div>
                     <div>
-                        {{-- 目標の投稿内容 ドロップダウン、投稿、、更新、削除は別ページ--}}
+                        {{-- 目標の投稿内容 --}}
                         <p class="mb-0">{!! nl2br(e($goal->content)) !!}</p>
                     </div>
-                    <div>
-                       @if (Auth::user()->complete($user->id))
-       　　　　           　　　 {!! Form::open(['route' => ['complete', $user->id]]) !!}]) !!}
-                               {!! Form::submit('未達成', ['class' => "btn btn-danger btn-block"]) !!}
-                           {!! Form::close() !!}
-                      @else
-                          {!! Form::open(['route' => ['complete', $user->id]]) !!}
-                               {!! Form::submit('達成', ['class' => "btn btn-primary btn-block"]) !!}
-                          {!! Form::close() !!}
-                      @endif
-                    </div>
+                
                     <div>
                         @if (Auth::id() == $goal->user_id)
                             {{-- 投稿削除ボタンのフォーム --}}
                             {!! Form::open(['route' => ['goals.destroy', $goal->id], 'method' => 'delete']) !!}
-                                {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+                                {!! Form::submit('削除', ['class' => 'btn btn-danger btn-sm']) !!}
                             {!! Form::close() !!}
                         @endif
                     </div>
+                     @if (Auth::id() == $goal->user_id)
+                         @include('user_favorite.complete_button')
+                     @else
+                         @include('user_favorite.favorite_button')
+                     @endif
                 </div>
             </li>
         @endforeach
