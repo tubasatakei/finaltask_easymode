@@ -20,7 +20,7 @@
                     {!! link_to_route('users.index', 'ユーザ一覧', [], ['class' => 'nav-link']) !!}</a>
                     <a class="dropdown-item">
                     {{-- ユーザ詳細(マイページ）へのリンク --}}
-                    {!! link_to_route('users.show', '目標一覧', ['user' => Auth::id()]) !!}</a>
+                    {!! link_to_route('users.show', 'マイページ', ['user' => Auth::id()]) !!}</a>
                     {{-- フォロー一覧へのリンク --}}
                     <a class="dropdown-item">
                         <a href="{{ route('users.followings', ['id' => Auth::id()]) }}" class="nav-link {{ Request::routeIs('users.followings') ? 'active' : '' }}">
