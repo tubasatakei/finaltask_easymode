@@ -11,6 +11,7 @@
                     <div>
                         {{-- 目標の投稿内容 --}}
                         <p class="mb-0">{!! nl2br(e($goal->content)) !!}</p>
+                        <p><span class="badge badge-secondary">{{ $goal->favorite_count() }}頑張れ!</span></p>
                     </div>
                 
                     <div>
